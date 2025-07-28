@@ -13,3 +13,4 @@ tf-keras
 # nvidia-curand-cu12==10.3.2.106
 # nvidia-cusolver-cu12==11.4.5.107
 # nvidia-nccl-cu12==2.19.3
+# nvidia-nvtx-cu12==12.1.105
