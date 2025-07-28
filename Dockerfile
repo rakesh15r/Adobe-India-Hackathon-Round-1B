@@ -1,12 +1,21 @@
-FROM python:3.10-slim
+FROM --platform=linux/amd64 python:3.10-slim
 
+# Set working directory
 WORKDIR /app
 
-# Copy code and wheels
-COPY linux_wheels ./wheels
+# Copy requirements and downloaded wheels
+COPY requirements.txt .
+COPY downloaded_packages/ ./downloaded_packages/
+
+# Install pip + dependencies from local wheels only
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-index --find-links=downloaded_packages -r requirements.txt
+
+# Copy source code and other files
 COPY . .
 
-# Install dependencies offline from wheels directory
-RUN pip install --no-index --find-links=./wheels -r requirements.txt
+# Set PYTHONPATH so modules in src/ are importable
+ENV PYTHONPATH="/app/src:${PYTHONPATH}"
 
+# Run your main script
 CMD ["python", "main.py"]
