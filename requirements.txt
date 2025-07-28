@@ -14,3 +14,4 @@ tf-keras
 # nvidia-cusolver-cu12==11.4.5.107
 # nvidia-nccl-cu12==2.19.3
 # nvidia-nvtx-cu12==12.1.105
+# triton==2.2.0
